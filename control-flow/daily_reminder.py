@@ -1,29 +1,44 @@
-# daily_reminder.py
+while True:
+    task = input("Enter your task: ").strip()
+    if task:  # Ensure task isn't empty
+        break
+    print("Task cannot be empty. Please enter a valid task.")
 
-# Prompt for task details
-task = input("Enter your task: ").strip()
-priority = input("Priority (high/medium/low): ").strip().lower()
-time_bound = input("Is it time-bound? (yes/no): ").strip().lower()
+# Get valid priority input
+while True:
+    priority = input("Priority (high/medium/low): ").strip().lower()
+    if priority in ("high", "medium", "low"):
+        break
+    print("Invalid priority. Please enter high, medium, or low.")
 
-# Match case to determine base message based on priority
+# Get valid time-bound input
+while True:
+    time_bound = input("Is it time-bound? (yes/no): ").strip().lower()
+    if time_bound in ("yes", "no"):
+        break
+    print('Please answer "yes" or "no".')
+
+# Process and generate reminder
 match priority:
     case "high":
-        message = f"Reminder: '{task}' is a high priority task"
+        reminder = f"Reminder: '{task}' is a high priority task"
+        if time_bound == "yes":
+            reminder += " that requires immediate attention today!"
+        else:
+            reminder += ". It's important but not time-bound. Plan accordingly."
+    
     case "medium":
-        message = f"Reminder: '{task}' is a medium priority task"
+        reminder = f"Reminder: '{task}' is a medium priority task"
+        if time_bound == "yes":
+            reminder += " that needs completion today!"
+        else:
+            reminder += ". Schedule it when convenient."
+    
     case "low":
-        message = f"Note: '{task}' is a low priority task"
-    case _:
-        message = f"Reminder: '{task}' has an unknown priority level"
+        reminder = f"Note: '{task}' is a low priority task"
+        if time_bound == "yes":
+            reminder += " but has a deadline. Complete when possible."
+        else:
+            reminder += ". Consider completing it when you have free time."
 
-# Add urgency if time-bound
-if time_bound == "yes":
-    message += " that requires immediate attention today!"
-else:
-    if priority == "low":
-        message += ". Consider completing it when you have free time."
-    else:
-        message += "."
-
-# Print the customized reminder
-print(message)
+print("\n" + reminder)
