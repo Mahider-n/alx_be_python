@@ -33,5 +33,4 @@ match priority:
         if time_bound == "yes":
             print(f"Note: '{task}' is a low priority task but has a deadline. Complete when possible.")
         else:
-            # This matches the exact example output for low priority non-time-bound tasks
             print(f"Note: '{task}' is a low priority task. Consider completing it when you have free time.")
