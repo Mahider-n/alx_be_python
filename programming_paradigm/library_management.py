@@ -1,6 +1,30 @@
+# library_management.py
+
+class Book:
+    def __init__(self, title, author):
+        self.title = title               # public
+        self.author = author             # public
+        self.__is_checked_out = False    # private
+
+    def check_out(self):
+        if not self.__is_checked_out:
+            self.__is_checked_out = True
+            return True
+        return False
+
+    def return_book(self):
+        if self.__is_checked_out:
+            self.__is_checked_out = False
+            return True
+        return False
+
+    def is_available(self):
+        return not self.__is_checked_out
+
+
 class Library:
     def __init__(self):
-        self._books = []   
+        self._books = []  # private list of Book objects
 
     def add_book(self, book):
         self._books.append(book)
@@ -26,4 +50,3 @@ class Library:
         else:
             for book in available_books:
                 print(f"{book.title} by {book.author}")
-
